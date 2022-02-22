@@ -10,7 +10,8 @@
           <form action="">
             <div class="form-group">
               <label for="nome">Nome</label>
-              <input class="form-control" type="text" name="nome" id="nome" />
+              <input class="form-control" type="text" name="nome" id="nome"
+              [(ngModel)] = 'usuario.nome' />
             </div>
 
             <div class="form-group">
@@ -21,17 +22,20 @@
                 name="usuario"
                 id="usuario"
                 placeholder="example@email.com"
+                [(ngModel)] = 'usuario.usuario'
               />
             </div>
 
             <div class="form-group">
               <label for="foto">Link da foto</label>
-              <input class="form-control" type="text" name="foto" id="foto" />
+              <input class="form-control" type="text" name="foto" id="foto"
+              [(ngModel)] = 'usuario.foto'/>
             </div>
 
             <div class="form-group">
               <label for="senha">Senha</label>
               <input
+              (input)="confirmSenha($event)"
                 class="form-control"
                 type="password"
                 name="senha"
@@ -46,12 +50,14 @@
                 type="password"
                 name="confirmSenha"
                 id="confirmSenha"
+                [(ngModel)] = 'usuario.senha'
               />
             </div>
 
             <div class="form-group">
               <label for="tipo">Tipo de usuario</label>
-              <select class="form-control" name="tipo" id="tipo">
+              <select class="form-control" name="tipo" id="tipo"
+              (change) = 'tipoUser($event)'>
                 <option>Selecione um tipo de usuário</option>
                 <option value="normal">Normal</option>
                 <option value="adm">Admnistrador</option>
@@ -60,7 +66,7 @@
 
             <div class="d-flex justify-content-center">
               <button type="submit" class="btn btn-danger mr-4" routerLink="/login">Cancelar</button>
-              <button type="submit" class="btn btn-success">Cadastrar</button>
+              <button type="submit" class="btn btn-success" (click) = 'cadastrar()'>Cadastrar</button>
             </div>
           </form>
         </div>
