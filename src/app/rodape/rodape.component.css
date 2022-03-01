@@ -1,3 +1,8 @@
+.page-footer {
+  background-color: #000135;
+  color: #F0E8F4;
+  }
+
 ul.social-network {
     list-style: none;
     padding: 0;
@@ -10,19 +15,23 @@ ul.social-network li{
 }
 
 .fa {
-    font-size: 35pt;
-    color: white;
+    font-size: 25pt;
+    color: #F0E8F4;
     padding: 10px;
+    transition: .3s;
 }
 
 .fa-facebook-square:hover {
     color: #3b5998;
+    font-size: 30pt;
 }
 
 .fa-instagram:hover{
     color: #C13584;
+    font-size: 30pt;
 }
 
 .fa-linkedin-square:hover{
     color:#0072b1;
+    font-size: 30pt;
 }

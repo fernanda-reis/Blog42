@@ -1,7 +1,23 @@
-#img-bg {
-  background-image: url('https://i.imgur.com/jAZOVhd.jpg');
-  min-height: 100vh;
+.cadastrar {
+  background-image: url('../../assets/img/orion-nebula.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 100vh;
+  color: #000000;
+}
+
+.caixa {
+  border: 2px solid #F0E8F4;
+  background-color: #f0e8f491;
+  border-radius: 10px;
+}
+
+input, select {
+  background-color: #F0E8F4;
+  border: 1px solid #646464;
+}
+
+.fs-9 {
+  font-size: 9pt;
 }

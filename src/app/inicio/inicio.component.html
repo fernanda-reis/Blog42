@@ -1,31 +1,36 @@
-<div class="container-fluid">
+<div class="inicio">
+<div class="container-fluid secao-inicio">
 
-  <div class="row bg-secondary d-flex align-items-center">
+  <div class="row d-flex align-items-center">
 
-    <div class="col-md-6 ">
+    <div class="col-md-6 d-flex flex-column">
 
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-6 text-white">
-          <h1 class="fs-54">Seja Bem Vinde!</h1>
-          <h5 class="fs-18">Expresse aqui os seus pensamentos e opiniões.</h5>
-        </div>
+          <div class="logo mt-2 d-flex justify-content-center">
+            <img src="../../assets/img/logo-fundo-transparente.png" width="180px" alt="Logo Blog 42">
+          </div>
+          <div class="text-center texto-inicio mx-5 ">
+            <h1 class="my-3">Saudações, viajante!</h1>
+            <p class="fs-18">Fique a vontade para expressar aqui os seus pensamentos e opiniões.</p>
+            <p class="fs-18">E lembre-se: Não entre em pânico!</p>
+
+          </div>
+          <div class="botoes mx-auto mt-4">
+            <button class="btn btn-space mr-2" data-toggle="modal" data-target="#novaPostagem">Nova Postagem</button>
+            <a href="#postagens" class="btn btn-space">Ver Postagens</a>
+
       </div>
 
-      <div class="row d-flex justify-content-center mt-3 mb-5">
-        <div class="col-md-6">
-          <button class="btn btn-light mr-2" data-toggle="modal" data-target="#novaPostagem">Nova Postagem</button>
-          <a href="#postagens" class="btn btn-outline-light">Ver Postagens</a>
-        </div>
-      </div>
+
     </div>
 
     <div class="col-md-6 d-flex justify-content-center">
-      <img src="https://i.imgur.com/47J314R.png" alt="" width="500px" height="500px">
+      <img src="../../assets/img/Starman.gif" alt="Homem no carro viajando pelo espaço" width="80%" >
     </div>
   </div>
 </div>
 
-<div class="container my-5" id="postagens">
+
+<div class="container postagens mt-5 p-5" id="postagens" >
 
   <nav>
     <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
@@ -41,7 +46,6 @@
   </div>
 
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="novaPostagem" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -64,7 +68,7 @@
           <textarea class="form-control" name="texto" id="texto" cols="30" rows="3"></textarea>
         </div>
         <div class="form-group">
-          <label for="texto">Escolha um tema ou <a routerLink="/tema" data-dismiss="modal">cadastre um novo</a></label>
+          <label for="texto">Escolha um tema ou <a routerLink="/tema" data-dismiss="modal">cadastre um novo</a>.</label>
           <select class="form-control" name="tema" id="tema">
             <option value="">Temas</option>
           </select>
@@ -77,4 +81,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
