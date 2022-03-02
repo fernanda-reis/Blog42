@@ -11,7 +11,7 @@
 
 }
 
-input, select {
+input, select, textarea {
   background-color: #F0E8F4;
 }
 
@@ -39,4 +39,8 @@ input, select {
 
 .nav-content {
   background-color: #F0E8F4;
+}
+
+.modal-content {
+  background-color: #f0e8f4ce;
 }

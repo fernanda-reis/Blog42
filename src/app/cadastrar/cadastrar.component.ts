@@ -34,14 +34,25 @@ export class CadastrarComponent implements OnInit {
   cadastrar(){
     this.usuario.tipo = this.usuarioTipo
 
-    if(this.usuario.senha != this.senhaConfirmada){
-      alert('As senhas não batem!')
+    if(this.senhaConfirmada.length < 5) {
+      alert('A senha deve ter pelo menos 5 caracteres!')
     } else {
-      this.authService.cadastrar(this.usuario).subscribe((resp:Usuario) => {
-        this.usuario = resp
-        this.router.navigate(['/entrar'])
-        alert('Usuario cadastrado com sucesso!')
-      })
+      if(this.usuario.senha != this.senhaConfirmada){
+        alert('As senhas não batem!')
+      } else {
+        this.authService.cadastrar(this.usuario).subscribe({
+          next: (resp:Usuario) => {
+            this.usuario = resp
+            this.router.navigate(['/entrar'])
+            alert('Usuario cadastrado com sucesso!')
+          },
+          error: (erro) => {
+            if (erro.status == 400) {
+              alert('E-mail já cadastrado!')
+            }
+          }
+        })
+      }
     }
   }
 
