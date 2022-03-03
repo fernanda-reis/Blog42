@@ -42,5 +42,11 @@ input, select, textarea {
 }
 
 .modal-content {
-  background-color: #f0e8f4ce;
+  background-color: #070831c4;
+  border: 1px solid #F0E8F4;
+  color: #F0E8F4;
+}
+
+.close {
+  color: #F0E8F4;
 }

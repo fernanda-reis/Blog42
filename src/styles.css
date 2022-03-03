@@ -4,6 +4,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: #F0E8F4;
+}
+
 .fs-54{
   font-size: 54pt;
 }
