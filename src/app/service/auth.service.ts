@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
@@ -6,27 +6,48 @@ import { UserLogin } from '../model/UserLogin';
 import { Usuario } from '../model/Usuario';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   constructor(private http: HttpClient) {}
 
-  entrar(userLogin: UserLogin) : Observable<UserLogin>{
-    return this.http.post<UserLogin>('https://blog-pessoal-42.herokuapp.com/usuarios/logar', userLogin)
+  token = {
+    headers: new HttpHeaders().set('Authorization', environment.token)
   }
 
-  cadastrar(usuario: Usuario): Observable<Usuario>{
-    return this.http.post<Usuario>('https://blog-pessoal-42.herokuapp.com/usuarios/cadastrar', usuario)
+  refreshToken() {
+      this.token = {
+        headers: new HttpHeaders().set('Authorization', environment.token)
+      }
   }
 
-  logado(){
-    let ok = false
+  entrar(userLogin: UserLogin): Observable<UserLogin> {
+    return this.http.post<UserLogin>(
+      'https://blog-pessoal-42.herokuapp.com/usuarios/logar',
+      userLogin
+    );
+  }
 
-    if(environment.token != ''){
-      ok = true
+  cadastrar(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(
+      'https://blog-pessoal-42.herokuapp.com/usuarios/cadastrar',
+      usuario
+    );
+  }
+
+  getByIdUser(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(
+      `https://blog-pessoal-42.herokuapp.com/usuarios/${id}`, this.token
+    );
+  }
+
+  logado() {
+    let ok = false;
+
+    if (environment.token != '') {
+      ok = true;
     }
 
-    return ok
+    return ok;
   }
 }

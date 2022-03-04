@@ -1,85 +1,249 @@
 <div class="inicio">
-<div class="container-fluid secao-inicio">
+  <div class="container-fluid secao-inicio">
+    <div class="row d-flex align-items-center">
+      <div class="col-md-6 my-5 d-flex flex-column">
+        <div class="logo d-flex justify-content-center">
+          <img
+            src="../../assets/img/logo-fundo-transparente.png"
+            width="180px"
+            alt="Logo Blog 42"
+          />
+        </div>
 
-  <div class="row d-flex align-items-center">
+        <div class="text-center texto-inicio mx-5">
+          <h1 class="my-3">Saudações, viajante!</h1>
+          <p class="fs-18">
+            Fique a vontade para expressar aqui os seus pensamentos e opiniões.
+          </p>
+          <p class="fs-18">E lembre-se: Não entre em pânico!</p>
+        </div>
 
-    <div class="col-md-6 d-flex flex-column">
+        <div class="botoes mx-auto mt-4">
+          <button
+            class="btn btn-space mr-2"
+            data-toggle="modal"
+            data-target="#novaPostagem"
+          >
+            Nova Postagem
+          </button>
+          <a href="#postagens" class="btn btn-space">Ver Postagens</a>
+        </div>
+      </div>
 
-          <div class="logo mt-2 d-flex justify-content-center">
-            <img src="../../assets/img/logo-fundo-transparente.png" width="180px" alt="Logo Blog 42">
+      <div class="col-md-6 d-flex justify-content-center">
+        <img
+          src="../../assets/img/Starman.gif"
+          alt="Homem no carro viajando pelo espaço"
+          width="80%"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="container postagens mt-5 p-5" id="postagens">
+    <nav>
+      <div
+        class="nav nav-tabs d-flex justify-content-center"
+        id="nav-tab"
+        role="tablist"
+      >
+        <a
+          class="nav-link active text-secondary font-weight-bold"
+          id="todas-postagens-tab"
+          data-toggle="tab"
+          href="#todas-postagens"
+          role="tab"
+          aria-controls="todas-postagens"
+          aria-selected="true"
+          >Todas as Postagens</a
+        >
+        <a
+        (click)="findByIdUser()"
+        class="nav-link text-secondary font-weight-bold"
+          id="minhas-postagens-tab"
+          data-toggle="tab"
+          href="#minhas-postagens"
+          role="tab"
+          aria-controls="minhas-postagens"
+          aria-selected="false"
+          >Minhas Postagens</a
+        >
+        <a
+          class="nav-link text-secondary font-weight-bold"
+          id="tema-postagens-tab"
+          data-toggle="tab"
+          href="#tema-postagens"
+          role="tab"
+          aria-controls="tema-postagens"
+          aria-selected="false"
+          >Postagens por Tema</a
+        >
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="todas-postagens"
+        role="tabpanel"
+        aria-labelledby="todas-postagens-tab"
+      >
+
+
+      <div class="card-columns my-5" >
+        <div class="card text-center" *ngFor="let post of listaPostagens">
+          <div class="card-body" >
+            <h5 class="card-title">{{post.titulo}}</h5>
+            <p class="card-text">{{post.texto}}</p>
+            <p class="card-text"><small class="text-muted">
+              {{post.tema.descricao}}
+            </small></p>
+            <p class="card-text mt-0"><small class="text-muted">
+              {{post.usuario.nome}} | {{post.data | date: 'dd/MM/yyyy'}} às {{post.data | date: 'HH:mm'}}
+            </small></p>
           </div>
-          <div class="text-center texto-inicio mx-5 ">
-            <h1 class="my-3">Saudações, viajante!</h1>
-            <p class="fs-18">Fique a vontade para expressar aqui os seus pensamentos e opiniões.</p>
-            <p class="fs-18">E lembre-se: Não entre em pânico!</p>
-
-          </div>
-          <div class="botoes mx-auto mt-4">
-            <button class="btn btn-space mr-2" data-toggle="modal" data-target="#novaPostagem">Nova Postagem</button>
-            <a href="#postagens" class="btn btn-space">Ver Postagens</a>
-
+        </div>
       </div>
 
 
-    </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="minhas-postagens"
+        role="tabpanel"
+        aria-labelledby="minhas-postagens-tab"
+      >
+      <div class="card-columns my-5" >
+        <div class="card text-center" *ngFor="let post of user.postagens">
+          <div class="card-body" >
+            <h5 class="card-title">{{post.titulo}}</h5>
+            <p class="card-text">{{post.texto}}</p>
+            <p class="card-text"><small class="text-muted">
+              {{post.tema.descricao}}
+            </small></p>
+            <p class="card-text mt-0"><small class="text-muted">
+              {{post.data | date: 'dd/MM/yyyy'}} às {{post.data | date: 'HH:mm'}}
+            </small></p>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="tema-postagens"
+        role="tabpanel"
+        aria-labelledby="tema-postagens-tab"
+      >
 
-    <div class="col-md-6 d-flex justify-content-center">
-      <img src="../../assets/img/Starman.gif" alt="Homem no carro viajando pelo espaço" width="80%" >
-    </div>
-  </div>
-</div>
 
-
-<div class="container postagens mt-5 p-5" id="postagens" >
-
-  <nav>
-    <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
-      <a class="nav-link active text-secondary font-weight-bold" id="todas-postagens-tab" data-toggle="tab" href="#todas-postagens" role="tab" aria-controls="todas-postagens" aria-selected="true">Todas as Postagens</a>
-      <a class="nav-link text-secondary font-weight-bold" id="minhas-postagens-tab" data-toggle="tab" href="#minhas-postagens" role="tab" aria-controls="minhas-postagens" aria-selected="false">Minhas Postagens</a>
-      <a class="nav-link text-secondary font-weight-bold" id="tema-postagens-tab" data-toggle="tab" href="#tema-postagens" role="tab" aria-controls="tema-postagens" aria-selected="false">Postagens por Tema</a>
-    </div>
-  </nav>
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="todas-postagens" role="tabpanel" aria-labelledby="todas-postagens-tab">Todas as Postagens</div>
-    <div class="tab-pane fade" id="minhas-postagens" role="tabpanel" aria-labelledby="minhas-postagens-tab">Minhas Postagens</div>
-    <div class="tab-pane fade" id="tema-postagens" role="tabpanel" aria-labelledby="tema-postagens-tab">Postagens por Tema</div>
-  </div>
-
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="novaPostagem" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Nova Postagem</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div class="card-columns my-5" *ngFor="let tema of listaTemas">
+        <div class="card text-center" *ngFor="let post of tema.postagens">
+          <div class="card-body" >
+            <h5 class="card-title">{{post.titulo}}</h5>
+            <p class="card-text">{{post.texto}}</p>
+            <p class="card-text mt-0"><small class="text-muted">
+              {{post.usuario.nome}} | {{post.data | date: 'dd/MM/yyyy'}} às {{post.data | date: 'HH:mm'}}
+            </small></p>
+          </div>
+        </div>
       </div>
 
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="titulo">Título</label>
-          <input class="form-control" type="text" if="titulo" placeholder="Digite o título">
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="novaPostagem"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Nova Postagem</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="form-group">
-          <label for="texto">Texto</label>
-          <textarea class="form-control" name="texto" id="texto" cols="30" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="texto">Escolha um tema ou <a routerLink="/tema" data-dismiss="modal">cadastre um novo</a>.</label>
-          <select class="form-control" name="tema" id="tema">
-            <option value="">Temas</option>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="titulo">Título</label>
+            <input
+              [(ngModel)]="postagem.titulo"
+              class="form-control"
+              type="text"
+              if="titulo"
+              placeholder="Digite o título"
+            />
+          </div>
+          <div class="form-group">
+            <label for="texto">Texto</label>
+            <textarea
+              [(ngModel)]="postagem.texto"
+              class="form-control"
+              name="texto"
+              id="texto"
+              cols="30"
+              rows="3"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="texto"
+              >Escolha um tema ou
+              <a routerLink="/tema" data-dismiss="modal">cadastre um novo</a
+              >.</label
+            >
+            <select
+              class="form-control"
+              name="tema"
+              id="tema"
+              [(ngModel)]="idTema"
+              (change)="findByIdTema()"
+            >
+              <option *ngFor="let tema of listaTemas" value="{{ tema.id }}">
+                {{ tema.descricao }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="texto"
+              >Escolha um tipo de Postagem:</label
+            >
+            <select
+            class="form-control"
+            name="tipo"
+            id="tipo"
+            [(ngModel)]="tipoPostagem"
+          >
+            <option value="PRIVADO">Privado</option>
+            <option value="PUBLICO">Publico</option>
           </select>
+          </div>
         </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success">Publicar</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="publicar()"
+            data-dismiss="modal"
+          >
+            Publicar
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

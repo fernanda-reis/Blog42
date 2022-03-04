@@ -9,9 +9,11 @@
 
 .caixa {
   border: 2px solid #F0E8F4;
-  background-color: #f0e8f491;
+  background-color: #f0e8f4a6;
   border-radius: 10px;
 }
+
+
 
 input, select {
   background-color: #F0E8F4;
