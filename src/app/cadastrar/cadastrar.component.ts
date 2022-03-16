@@ -37,6 +37,10 @@ export class CadastrarComponent implements OnInit {
     if(this.senhaConfirmada.length < 5) {
       alert('A senha deve ter pelo menos 5 caracteres!')
     } else {
+      if(this.usuario.foto == null){
+        this.usuario.foto = 'https://i.imgur.com/B0uqNg1.png'
+      }
+
       if(this.usuario.senha != this.senhaConfirmada){
         alert('As senhas não batem!')
       } else {

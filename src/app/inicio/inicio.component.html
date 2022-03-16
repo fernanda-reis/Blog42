@@ -122,7 +122,11 @@
             </small></p>
             <p class="card-text mt-0"><small class="text-muted">
               {{post.data | date: 'dd/MM/yyyy'}} às {{post.data | date: 'HH:mm'}}
-            </small></p>
+            </small>
+          </p>
+
+          <a [routerLink] = "['/postagem-edit', post.id]" class="text-info mr-3">Editar</a>
+          <a [routerLink] = "['/postagem-delete', post.id]" class="texto-danger">Apagar</a>
           </div>
         </div>
       </div>
@@ -182,7 +186,7 @@
               [(ngModel)]="postagem.titulo"
               class="form-control"
               type="text"
-              if="titulo"
+              id="titulo"
               placeholder="Digite o título"
             />
           </div>
