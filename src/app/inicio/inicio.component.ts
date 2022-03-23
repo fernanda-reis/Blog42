@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.prod';
 import { Postagem } from '../model/Postagem';
 import { Tema } from '../model/Tema';
 import { Usuario } from '../model/Usuario';
+import { AlertasService } from '../service/alertas.service';
 import { AuthService } from '../service/auth.service';
 import { PostagemService } from '../service/postagem.service';
 import { TemaService } from '../service/tema.service';
@@ -26,19 +27,23 @@ export class InicioComponent implements OnInit {
   user: Usuario = new Usuario()
   idUser = environment.id
 
+  key = 'data'
+  reverse = true
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private postagemService: PostagemService,
-    private temaService: TemaService
+    private temaService: TemaService,
+    private alertas: AlertasService
   ) { }
 
   ngOnInit(){
     window.scroll(0,0)
-    // if (environment.token == ''){
-    //   alert('Sua sessão expirou! Faça o login novamente.')
-    //  this.router.navigate(['/entrar'])
-    //  }
+    if (environment.token == ''){
+      alert('Sua sessão expirou! Faça o login novamente.')
+     this.router.navigate(['/entrar'])
+     }
 
     this.authService.refreshToken()
     this.getAllTemas()
@@ -54,6 +59,7 @@ export class InicioComponent implements OnInit {
   findByIdTema(){
     this.temaService.getByIdTema(this.idTema).subscribe((resp: Tema) => {
       this.tema = resp
+
     })
   }
 
@@ -66,7 +72,6 @@ export class InicioComponent implements OnInit {
   findByIdUser(){
     this.authService.getByIdUser(this.idUser).subscribe((resp:Usuario) => {
       this.user = resp
-      console.log(this.user)
     })
   }
 
@@ -84,12 +89,13 @@ export class InicioComponent implements OnInit {
 
     this.postagemService.postPostagem(this.postagem).subscribe((resp: Postagem) => {
       this.postagem = resp
-      alert('Postagem criada com sucesso!')
+      this.alertas.showAlertSuccess('Postagem criada com sucesso!')
       this.postagem = new Postagem()
       this.idTema = 0
       this.tipoPostagem = ''
 
       this.getAllPostagens()
+      this.getAllTemas()
     })
 
   }

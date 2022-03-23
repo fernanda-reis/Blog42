@@ -58,8 +58,8 @@
           >Todas as Postagens</a
         >
         <a
-        (click)="findByIdUser()"
-        class="nav-link text-secondary font-weight-bold"
+          (click)="findByIdUser()"
+          class="nav-link text-secondary font-weight-bold"
           id="minhas-postagens-tab"
           data-toggle="tab"
           href="#minhas-postagens"
@@ -87,24 +87,26 @@
         role="tabpanel"
         aria-labelledby="todas-postagens-tab"
       >
-
-
-      <div class="card-columns my-5" >
-        <div class="card text-center" *ngFor="let post of listaPostagens">
-          <div class="card-body" >
-            <h5 class="card-title">{{post.titulo}}</h5>
-            <p class="card-text">{{post.texto}}</p>
-            <p class="card-text"><small class="text-muted">
-              {{post.tema.descricao}}
-            </small></p>
-            <p class="card-text mt-0"><small class="text-muted">
-              {{post.usuario.nome}} | {{post.data | date: 'dd/MM/yyyy'}} às {{post.data | date: 'HH:mm'}}
-            </small></p>
+        <div class="card-columns my-5">
+          <div class="card text-center" *ngFor="let post of listaPostagens | orderBy : key : reverse">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.titulo }}</h5>
+              <p class="card-text">{{ post.texto }}</p>
+              <p class="card-text">
+                <small class="text-muted">
+                  {{ post.tema.descricao }}
+                </small>
+              </p>
+              <p class="card-text mt-0">
+                <small class="text-muted">
+                  {{ post.usuario.nome }} |
+                  {{ post.data | date: "dd/MM/yyyy" }} às
+                  {{ post.data | date: "HH:mm" }}
+                </small>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-
-
       </div>
       <div
         class="tab-pane fade"
@@ -112,24 +114,41 @@
         role="tabpanel"
         aria-labelledby="minhas-postagens-tab"
       >
-      <div class="card-columns my-5" >
-        <div class="card text-center" *ngFor="let post of user.postagens">
-          <div class="card-body" >
-            <h5 class="card-title">{{post.titulo}}</h5>
-            <p class="card-text">{{post.texto}}</p>
-            <p class="card-text"><small class="text-muted">
-              {{post.tema.descricao}}
-            </small></p>
-            <p class="card-text mt-0"><small class="text-muted">
-              {{post.data | date: 'dd/MM/yyyy'}} às {{post.data | date: 'HH:mm'}}
-            </small>
-          </p>
+        <div class="card-columns my-5">
+          <div class="card text-center" *ngFor="let post of user.postagens | orderBy : key : reverse">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.titulo }}</h5>
+              <p class="card-text">{{ post.texto }}</p>
+              <p class="card-text">
+                <small class="text-muted">
+                  {{ post.tema.descricao }}
+                </small>
+              </p>
+              <p class="card-text mt-0">
+                <small class="text-muted">
+                  {{ post.data | date: "dd/MM/yyyy" }} às
+                  {{ post.data | date: "HH:mm" }}
+                </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  {{ post.tipo }}
+                </small>
+              </p>
 
-          <a [routerLink] = "['/postagem-edit', post.id]" class="text-info mr-3">Editar</a>
-          <a [routerLink] = "['/postagem-delete', post.id]" class="texto-danger">Apagar</a>
+              <a
+                [routerLink]="['/postagem-edit', post.id]"
+                class="text-info mr-3"
+                >Editar</a
+              >
+              <a
+                [routerLink]="['/postagem-delete', post.id]"
+                class="texto-danger"
+                >Apagar</a
+              >
+            </div>
           </div>
         </div>
-      </div>
       </div>
       <div
         class="tab-pane fade"
@@ -137,20 +156,30 @@
         role="tabpanel"
         aria-labelledby="tema-postagens-tab"
       >
+        <div class="card-columns d-flex flex-column align-items-center" *ngFor="let tema of listaTemas">
+          <h4 class="text-center my-5">{{ tema.descricao }}</h4>
 
 
-      <div class="card-columns my-5" *ngFor="let tema of listaTemas">
-        <div class="card text-center" *ngFor="let post of tema.postagens">
-          <div class="card-body" >
-            <h5 class="card-title">{{post.titulo}}</h5>
-            <p class="card-text">{{post.texto}}</p>
-            <p class="card-text mt-0"><small class="text-muted">
-              {{post.usuario.nome}} | {{post.data | date: 'dd/MM/yyyy'}} às {{post.data | date: 'HH:mm'}}
-            </small></p>
+          <div class="bloco d-flex flex-wrap justify-content-center">
+
+            <div *ngFor="let post of tema.postagens | orderBy : key : reverse">
+              <div class="card text-center" *ngIf="post.tipo == 'PUBLICO'">
+                <div class="card-body">
+                  <h5 class="card-title">{{ post.titulo }}</h5>
+                  <p class="card-text">{{ post.texto }}</p>
+                  <p class="card-text mt-0">
+                    <small class="text-muted">
+                      {{ post.usuario.nome }} |
+                      {{ post.data | date: "dd/MM/yyyy" }} às
+                      {{ post.data | date: "HH:mm" }}
+                    </small>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
+          <hr>
         </div>
-      </div>
-
       </div>
     </div>
   </div>
@@ -220,18 +249,16 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="texto"
-              >Escolha um tipo de Postagem:</label
-            >
+            <label for="texto">Escolha um tipo de Postagem:</label>
             <select
-            class="form-control"
-            name="tipo"
-            id="tipo"
-            [(ngModel)]="tipoPostagem"
-          >
-            <option value="PRIVADO">Privado</option>
-            <option value="PUBLICO">Publico</option>
-          </select>
+              class="form-control"
+              name="tipo"
+              id="tipo"
+              [(ngModel)]="tipoPostagem"
+            >
+              <option value="PRIVADO">Privado</option>
+              <option value="PUBLICO">Publico</option>
+            </select>
           </div>
         </div>
         <div class="modal-footer">
