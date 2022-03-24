@@ -87,6 +87,16 @@
         role="tabpanel"
         aria-labelledby="todas-postagens-tab"
       >
+
+      <div class="row d-flex justify-content-center my-5">
+        <div class="col-md-4">
+          <div class="form-group">
+            <input type="text" class="form-control pesquisa" id="titulo" placeholder="Pesquise um titulo de postagem" [(ngModel)] = 'tituloPost'
+            (keyup)="findByTituloPost()">
+          </div>
+        </div>
+      </div>
+
         <div class="card-columns my-5">
           <div class="card text-center" *ngFor="let post of listaPostagens | orderBy : key : reverse">
             <div class="card-body">
@@ -156,6 +166,7 @@
         role="tabpanel"
         aria-labelledby="tema-postagens-tab"
       >
+
         <div class="card-columns d-flex flex-column align-items-center" *ngFor="let tema of listaTemas">
           <h4 class="text-center my-5">{{ tema.descricao }}</h4>
 

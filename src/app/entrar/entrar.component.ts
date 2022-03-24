@@ -26,6 +26,7 @@ export class EntrarComponent implements OnInit {
         environment.token = this.userLogin.token;
         environment.nome = this.userLogin.nome;
         environment.foto = this.userLogin.foto;
+        environment.tipo = this.userLogin.tipo;
         environment.id = this.userLogin.id;
 
        /* console.log(environment.token)

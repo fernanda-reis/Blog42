@@ -16,13 +16,19 @@ export class TemaComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private temaService: TemaService
+    private temaService: TemaService,
   ) { }
 
   ngOnInit(){
     if(environment.token == ''){
       this.router.navigate(['/entrar'])
     }
+
+    if(environment.tipo != 'adm'){
+      alert('Você não tem permissão para acessar essa página!')
+      this.router.navigate(['/inicio'])
+    }
+
     this.findAllTemas()
 
   }
