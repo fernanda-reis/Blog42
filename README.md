@@ -1,6 +1,8 @@
-# BlogPessoal
+# Blog Pessoal 42
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.3.
+Projeto gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 13.2.3.  
+Front-end do projeto de Blog Pessoal desenvolvido durante o bootcamp da Generation Brasil.  
+Hospedado no [netlify](https://blog42.netlify.app/) e consumindo a API neste [repositório](https://github.com/fernanda-reis/BlogPessoal).
 
 ## Development server
 
