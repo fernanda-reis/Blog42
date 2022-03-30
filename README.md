@@ -1,4 +1,4 @@
-# Blog Pessoal 42
+# Blog 42
 
 Projeto gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 13.2.3.  
 Front-end do projeto de Blog Pessoal desenvolvido durante o bootcamp da Generation Brasil.  
