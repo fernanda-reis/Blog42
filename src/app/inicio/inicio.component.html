@@ -167,14 +167,10 @@
         aria-labelledby="tema-postagens-tab"
       >
 
-        <div class="card-columns d-flex flex-column align-items-center" *ngFor="let tema of listaTemas">
-          <h4 class="text-center my-5">{{ tema.descricao }}</h4>
-
-
-          <div class="bloco d-flex flex-wrap justify-content-center">
-
-            <div *ngFor="let post of tema.postagens | orderBy : key : reverse">
-              <div class="card text-center" *ngIf="post.tipo == 'PUBLICO'">
+        <div class="" *ngFor="let tema of meusTemas">
+          <h4 class="text-center my-5">{{tema.tema}}</h4>
+          <div class="card-columns mb-4">
+              <div class="card text-center" *ngFor="let post of tema.posts | orderBy : key : reverse">
                 <div class="card-body">
                   <h5 class="card-title">{{ post.titulo }}</h5>
                   <p class="card-text">{{ post.texto }}</p>
@@ -187,7 +183,6 @@
                   </p>
                 </div>
               </div>
-            </div>
           </div>
           <hr>
         </div>

@@ -5,6 +5,7 @@ import { Tema } from 'src/app/model/Tema';
 import { AuthService } from 'src/app/service/auth.service';
 import { PostagemService } from 'src/app/service/postagem.service';
 import { TemaService } from 'src/app/service/tema.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-postagem-edit',
@@ -28,11 +29,11 @@ export class PostagemEditComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0,0)
-    
-        // if (environment.token == ''){
-    //   alert('Sua sessão expirou! Faça o login novamente.')
-    //  this.router.navigate(['/entrar'])
-    //  }
+
+        if (environment.token == ''){
+      alert('Sua sessão expirou! Faça o login novamente.')
+     this.router.navigate(['/entrar'])
+     }
 
     this.authService.refreshToken()
     let id = this.route.snapshot.params['id']

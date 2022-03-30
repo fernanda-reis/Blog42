@@ -21,8 +21,16 @@ export class InicioComponent implements OnInit {
 
   tema: Tema = new Tema();
   listaTemas: Tema[];
+
+  meusTemas: Array<{
+    tema: string;
+    posts: Postagem[];
+  }> = [];
+
+  listaTemaPostagens: Postagem[];
+
   idTema: number;
-  temaPost: string
+  temaPost: string;
 
   user: Usuario = new Usuario();
   idUser = environment.id;
@@ -35,7 +43,7 @@ export class InicioComponent implements OnInit {
     private router: Router,
     private postagemService: PostagemService,
     private temaService: TemaService
-      ) {}
+  ) {}
 
   ngOnInit() {
     window.scroll(0, 0);
@@ -50,8 +58,31 @@ export class InicioComponent implements OnInit {
   }
 
   getAllTemas() {
+    this.meusTemas = []
+
     this.temaService.getAllTemas().subscribe((resp: Tema[]) => {
       this.listaTemas = resp;
+
+      this.listaTemas.forEach((tema) => {
+        this.listaTemaPostagens = [];
+        let nomeTema = tema.descricao;
+        let temaPostagens = tema.postagens;
+
+        if (temaPostagens.length != 0) {
+          temaPostagens.forEach((post) => {
+            if (post.tipo == 'PUBLICO') {
+              this.listaTemaPostagens.push(post);
+            }
+          });
+        }
+        let novoTema = {
+          tema: nomeTema,
+          posts: this.listaTemaPostagens,
+        };
+
+        this.meusTemas.push(novoTema);
+
+      });
     });
   }
 
@@ -82,8 +113,6 @@ export class InicioComponent implements OnInit {
 
     this.postagem.tipo = this.tipoPostagem;
 
-    console.log(this.postagem);
-
     this.postagemService
       .postPostagem(this.postagem)
       .subscribe((resp: Postagem) => {
@@ -104,9 +133,9 @@ export class InicioComponent implements OnInit {
       this.postagemService
         .getByTituloPostagem(this.tituloPost)
         .subscribe((resp: Postagem[]) => {
-          this.listaPostagens = resp;
+          let listaFiltro = resp.filter((post) => post.tipo == 'PUBLICO');
+          this.listaPostagens = listaFiltro;
         });
     }
   }
-
 }

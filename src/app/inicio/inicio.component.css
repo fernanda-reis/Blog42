@@ -11,9 +11,15 @@
 
 }
 
+
+
 .card {
-  margin: 5px;
+  margin: 10px 5px;
+  max-width: 300px;
+  display: inline-block;
 }
+
+
 
 input, select, textarea {
   background-color: #F0E8F4;
